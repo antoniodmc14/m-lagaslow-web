@@ -36,13 +36,22 @@
 
     html {
       overflow-y: scroll !important;
+      scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Gilroy', sans-serif;
     }
 
-    h1, h2, h3 {
+    h1 {
+      font-weight: 600;
+    }
+
+    h2 {
+      font-weight: 600;
+    }
+
+    h3 {
       font-weight: 600;
     }
 
@@ -66,6 +75,47 @@
 
     .lenis.lenis-scrolling iframe {
       pointer-events: none;
+    }
+
+    /* Time/price info tags: default gray, hover = blue slide-in from left */
+    .info-tag {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      background-color: #F3F4F6;
+      color: #000;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.5rem;
+      cursor: default;
+      z-index: 20;
+    }
+
+    .info-tag::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background-color: #307EFF;
+      transition: width 0.35s ease-in-out;
+      z-index: 0;
+    }
+
+    .info-tag .info-tag-text {
+      position: relative;
+      z-index: 1;
+      transition: color 0.35s ease-in-out;
+    }
+
+    .info-tag:hover::before {
+      width: 100%;
+    }
+
+    .info-tag:hover .info-tag-text {
+      color: #fff;
     }
 
     /* Burger icon: 3 lines → X */
@@ -130,15 +180,15 @@
 </head>
 
 <body class="antialiased">
-  <main id="hero" class="relative h-[85vh] overflow-hidden">
+  <main id="hero" class="relative h-[85vh] md:h-[90vh] overflow-hidden">
     <!-- Imágenes de fondo del carrusel -->
     <div class="absolute inset-0">
       <img src="../img/Carousel_01.png" alt="Málaga Slow al atardecer"
-        class="hero-slide absolute inset-0 w-full h-[85vh] object-cover opacity-100 transition-opacity duration-[1500ms] ease-in-out" />
+        class="hero-slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-[1500ms] ease-in-out" />
       <img src="../img/Carousel_02.png" alt="Imagen de carrusel de Málaga Slow 2"
-        class="hero-slide absolute inset-0 w-full h-[85vh] object-cover opacity-0 transition-opacity duration-[1500ms] ease-in-out" />
+        class="hero-slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms] ease-in-out" />
       <img src="../img/Carousel_03.png" alt="Imagen de carrusel de Málaga Slow 3"
-        class="hero-slide absolute inset-0 w-full h-[85vh] object-cover opacity-0 transition-opacity duration-[1500ms] ease-in-out" />
+        class="hero-slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms] ease-in-out" />
     </div>
     <!-- Capa oscura para legibilidad -->
     <div class="absolute inset-0 bg-black/30 z-[0]" aria-hidden="true"></div>
@@ -224,7 +274,7 @@
     <!-- Contenido hero -->
     <div class="absolute inset-0 flex flex-col items-center justify-center px-4 text-center z-[1]">
       <h1
-        class="text-white font-semibold text-[36px] md:text-[40px] leading-tight tracking-[-0.04em] max-w-4xl mb-8 drop-shadow-sm">
+        class="text-white font-semibold text-[40px] sm:text-[44px] md:text-[48px] leading-tight tracking-[-0.04em] max-w-4xl mb-8 drop-shadow-sm">
         Skip the crowd
         <span class="block font-normal text-[23px] md:text-[26px] lg:text-[26px]">tu tuk-tuk en Málaga</span>
       </h1>
@@ -239,14 +289,14 @@
   <section id="booking" class="bg-white pt-40 pb-0 md:pb-24">
     <div class="max-w-7xl mx-auto px-8 flex flex-col items-center">
       <h2
-        class="experience-reveal text-center text-[#1E1E1E] text-[36px] md:text-[40px] font-bold tracking-[-0.04em] leading-[1.1] max-w-xl opacity-0 translate-y-4 transition-all duration-700">
+        class="experience-reveal text-center text-[#1E1E1E] text-[30px] sm:text-[32px] md:text-[36px] font-bold tracking-[-0.04em] leading-[1.1] max-w-xl opacity-0 translate-y-4 transition-all duration-700">
         Vive la experiencia<br>
-        de la ciudad redonda
+        de una ciudad redonda
       </h2>
-      <p class="experience-reveal mt-[50px] max-w-[600px] mx-auto text-center text-gray-600 text-lg font-normal tracking-[-0.05em] leading-[1.35] opacity-0 translate-y-4 transition-all duration-700"
+      <p class="experience-reveal mt-[50px] max-w-[600px] mx-auto text-center text-gray-600 text-lg font-normal tracking-[-0.04em] leading-[1.35] opacity-0 translate-y-4 transition-all duration-700"
         style="text-wrap: balance;">
         Descubre el encanto de Málaga. Nuestro tour privado en vehículo eléctrico te permite acceder a los rincones
-        más conocidos de la ciudad redonda, donde los autobuses turísticos no pueden llegar. Una experiencia cómoda y
+        más conocidos de la ciudad, donde los autobuses turísticos no pueden llegar. Una experiencia cómoda y
         privada, perfecta para familias.
       </p>
     </div>
@@ -257,10 +307,10 @@
         <h2 class="text-left text-[#1E1E1E] text-[36px] md:text-[36px] tracking-[-0.04em] font-bold mb-8 md:mb-10">
           Nuestros tours</h2>
         <div id="tours"
-          class="grid grid-cols-1 gap-8 items-stretch md:flex md:flex-row md:overflow-x-auto md:snap-x md:snap-mandatory md:gap-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
+          class="scroll-mt-24 grid grid-cols-1 gap-8 items-stretch md:flex md:flex-row md:overflow-x-auto md:snap-x md:snap-mandatory md:gap-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
           <!-- Tarjeta 1: Tour Standard -->
           <article
-            class="max-w-[400px] mx-auto flex flex-col bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-xl md:min-w-[350px] md:snap-center lg:min-w-0">
+            class="relative cursor-pointer max-w-[400px] mx-auto flex flex-col bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-xl md:min-w-[350px] md:snap-center lg:min-w-0">
             <div class="p-4 pb-0 shrink-0">
               <div class="rounded-lg overflow-hidden aspect-[4/3] w-full">
                 <img src="../img/Art_Culture_Card.png" alt="Tour Standard por Málaga" class="w-full h-full object-cover" />
@@ -276,17 +326,18 @@
             </div>
             <div class="flex justify-between items-center gap-3 p-4 flex-wrap shrink-0">
               <div class="flex items-center gap-2">
-                <span class="bg-gray-200 text-black text-sm font-semibold px-3 py-1.5 rounded-lg">60 min</span>
-                <span class="bg-gray-200 text-black text-sm font-semibold px-3 py-1.5 rounded-lg">30 € / pax</span>
+                <span class="info-tag"><span class="info-tag-text">60 min</span></span>
+                <span class="info-tag"><span class="info-tag-text">30 € / pax</span></span>
               </div>
               <a href="standard-tour.html"
-                class="bg-[#307EFF] text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg shrink-0">
-                Reserva</a>
+                class="relative z-20 bg-[#307EFF] text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-colors duration-300 ease-out hover:bg-[#4B8BFF] shrink-0">
+                Más info</a>
             </div>
+            <a href="standard-tour.html" class="absolute inset-0 z-10" aria-label="Abrir página del Tour Standard"></a>
           </article>
           <!-- Tarjeta 2: Tour Express -->
           <article
-            class="max-w-[400px] mx-auto flex flex-col bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-xl md:min-w-[350px] md:snap-center lg:min-w-0">
+            class="relative cursor-pointer max-w-[400px] mx-auto flex flex-col bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-xl md:min-w-[350px] md:snap-center lg:min-w-0">
             <div class="p-4 pb-0 shrink-0">
               <div class="rounded-lg overflow-hidden aspect-[4/3] w-full">
                 <img src="../img/Coastal_Tour_card.png" alt="Tour Express por la costa" class="w-full h-full object-cover" />
@@ -301,17 +352,18 @@
             </div>
             <div class="flex justify-between items-center gap-3 p-4 flex-wrap shrink-0">
               <div class="flex items-center gap-2">
-                <span class="bg-gray-200 text-black text-sm font-semibold px-3 py-1.5 rounded-lg">40 min</span>
-                <span class="bg-gray-200 text-black text-sm font-semibold px-3 py-1.5 rounded-lg">20 € / pax</span>
+                <span class="info-tag"><span class="info-tag-text">40 min</span></span>
+                <span class="info-tag"><span class="info-tag-text">20 € / pax</span></span>
               </div>
               <a href="express-tour.html"
-                class="bg-[#307EFF] text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg shrink-0">
-                Reserva</a>
+                class="relative z-20 bg-[#307EFF] text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-colors duration-300 ease-out hover:bg-[#4B8BFF] shrink-0">
+                Más info</a>
             </div>
+            <a href="express-tour.html" class="absolute inset-0 z-10" aria-label="Abrir página del Tour Express"></a>
           </article>
           <!-- Tarjeta 3: Tour Premium -->
           <article
-            class="max-w-[400px] mx-auto flex flex-col bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-xl md:min-w-[350px] md:snap-center lg:min-w-0">
+            class="relative cursor-pointer max-w-[400px] mx-auto flex flex-col bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-xl md:min-w-[350px] md:snap-center lg:min-w-0">
             <div class="p-4 pb-0 shrink-0">
               <div class="rounded-lg overflow-hidden aspect-[4/3] w-full">
                 <img src="../img/Oldtown_Tour_Card.png" alt="Tour Premium por el casco antiguo" class="w-full h-full object-cover" />
@@ -326,13 +378,14 @@
             </div>
             <div class="flex justify-between items-center gap-3 p-4 flex-wrap shrink-0">
               <div class="flex items-center gap-2">
-                <span class="bg-gray-200 text-black text-sm font-semibold px-3 py-1.5 rounded-lg">90 min</span>
-                <span class="bg-gray-200 text-black text-sm font-semibold px-3 py-1.5 rounded-lg">35 € / pax</span>
+                <span class="info-tag"><span class="info-tag-text">90 min</span></span>
+                <span class="info-tag"><span class="info-tag-text">35 € / pax</span></span>
               </div>
               <a href="premium-tour.html"
-                class="bg-[#307EFF] text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg shrink-0">
-                Reserva</a>
+                class="relative z-20 bg-[#307EFF] text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-colors duration-300 ease-out hover:bg-[#4B8BFF] shrink-0">
+                Más info</a>
             </div>
+            <a href="premium-tour.html" class="absolute inset-0 z-10" aria-label="Abrir página del Tour Premium"></a>
           </article>
         </div>
       </div>
@@ -352,10 +405,12 @@
     <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[2fr_2fr] gap-20 items-center">
       <div
         class="mx-auto max-w-[600px] order-2 md:order-1 text-center md:text-left opacity-0 translate-y-10 transition-all duration-1000 ease-out about-reveal">
-        <p class="text-lg leading-[1.35] tracking-[-0.06em] text-gray-800">
-          Creemos que la mejor manera de conocer una ciudad es a través de su alma. Somos gente local, apasionada por
-          compartir los rincones más icónicos y la historia de Málaga, desde el Teatro Romano hasta la majestuosa
-          Alcazaba. Nuestros tours privados están pensados para quienes quieren entender el patrimonio de la ciudad.
+        <p class="text-lg leading-[1.35] tracking-[-0.04em] text-gray-800">
+          Málaga Slow no es solo una empresa de tours; es el proyecto personal de Marcos y José, dos amigos de toda la vida unidos por una pasión compartida: nuestra ciudad.<br><br>
+
+Estamos convencidos de que la mejor forma de descubrir Málaga no es desde la ventanilla de un autobús, sino a través de los ojos de quienes hemos crecido en sus calles. Queremos mostrarte el alma de nuestra tierra desde una perspectiva diferente, combinando la comodidad de nuestros vehículos eléctricos con la cercanía y profesionalidad que mereces.
+
+Desde los rincones más icónicos hasta esos secretos que solo los locales conocemos, estamos aquí para que no solo veas la ciudad, sino para que la sientas y la entiendas tal como nosotros la vivimos.
           
         </p>
         <a href="#tours"
@@ -371,31 +426,34 @@
   </section>
 
   <!-- Opiniones de clientes -->
-  <section class="w-full bg-white py-24 pb-32 mt-24">
+  <section class="w-full bg-white py-18 pb-32 mt-24">
     <div class="max-w-7xl mx-auto px-8">
       <h2 class="text-left text-3xl md:text-4xl font-bold tracking-[-0.04em] text-black mb-8 md:mb-16">Guest reviews</h2>
       <div
-        class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <article class="max-w-[320px] mx-auto flex-shrink-0 w-[85vw] snap-center bg-[#F3F4F6] rounded-[5px] p-8 md:w-[320px]">
+        class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-8 md:gap-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <article
+          class="max-w-[320px] mx-auto flex-shrink-0 w-[85vw] snap-center bg-[#F3F4F6] rounded-[5px] p-8 md:min-w-[350px] lg:max-w-[400px] lg:w-full lg:mx-0">
           <div class="text-[#307EFF] text-lg mb-4" aria-hidden="true">★★★★★</div>
-          <p class="text-gray-700 leading-relaxed mb-6 tracking-[-0.06em]">
+          <p class="text-gray-700 leading-[1.35] mb-6 tracking-[-0.06em]">
             La mejor forma de ver Málaga. Nuestro conductor fue muy amable y conocía a la perfección la historia de la
             ciudad.
           </p>
           <p class="font-bold text-gray-900">Sarah M.</p>
           <p class="text-xs text-gray-400">Reseña en Google</p>
         </article>
-        <article class="max-w-[320px] mx-auto flex-shrink-0 w-[85vw] snap-center bg-[#F3F4F6] rounded-[5px] p-8 md:w-[320px]">
+        <article
+          class="max-w-[320px] mx-auto flex-shrink-0 w-[85vw] snap-center bg-[#F3F4F6] rounded-[5px] p-8 md:min-w-[350px] lg:max-w-[400px] lg:w-full lg:mx-0">
           <div class="text-[#307EFF] text-lg mb-4" aria-hidden="true">★★★★★</div>
-          <p class="text-gray-700 leading-relaxed mb-6 tracking-[-0.06em]">
+          <p class="text-gray-700 leading-[1.35] mb-6 tracking-[-0.06em]">
             Nos encantó el tour por el casco antiguo. Mucho más personal que un autobús grande. ¡Muy recomendable!
           </p>
           <p class="font-bold text-gray-900">James & Laura</p>
           <p class="text-xs text-gray-400">Reseña en Google</p>
         </article>
-        <article class="max-w-[320px] mx-auto flex-shrink-0 w-[85vw] snap-center bg-[#F3F4F6] rounded-[5px] p-8 md:w-[320px]">
+        <article
+          class="max-w-[320px] mx-auto flex-shrink-0 w-[85vw] snap-center bg-[#F3F4F6] rounded-[5px] p-8 md:min-w-[350px] lg:max-w-[400px] lg:w-full lg:mx-0">
           <div class="text-[#307EFF] text-lg mb-4" aria-hidden="true">★★★★★</div>
-          <p class="text-gray-700 leading-relaxed mb-6 tracking-[-0.06em]">
+          <p class="text-gray-700 leading-[1.35] mb-6 tracking-[-0.06em]">
             Hicimos la ruta costera: vistas impresionantes y recomendaciones locales para probar los mejores espetos.
             Un día perfecto.
           </p>
@@ -406,50 +464,65 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-[#1E1E1E] text-[#FFFFFF] py-6 px-8 md:py-16 md:px-16 md:text-[16px]">
-    <div class="max-w-[1440px] mx-auto">
-      <!-- Móvil -->
-      <div class="grid grid-cols-3 gap-x-1 gap-y-6 text-left md:hidden">
-        <div class="flex flex-col space-y-2 min-w-0 break-words">
-          <a href="tel:+34658451301" class="text-[12px] text-[#FFFFFF] hover:underline cursor-pointer break-words">+34
-            658 451 301</a>
-          <a href="mailto:info@malagaslow.com" class="text-[12px] text-[#FFFFFF] hover:underline cursor-pointer break-words">info@malagaslow.com</a>
+
+
+<footer class="bg-[#1E1E1E] text-[#FFFFFF]">
+    <!-- Mobile footer (ONLY): per provided spec -->
+    <div class="md:hidden flex flex-col items-start py-10 px-8 text-left text-[11px]">
+      <!-- Top row (Logo + Contact columns) -->
+      <div class="flex flex-row justify-between w-full items-start">
+        <img src="../img/Logo_footer.png" alt="Málaga Slow Logo" class="h-8 w-auto object-contain" />
+
+        <div class="flex flex-row gap-x-4">
+          <div class="flex flex-col space-y-2 w-fit min-w-0">
+            <a href="https://www.instagram.com/malagaslow/" target="_blank" rel="noopener noreferrer"
+              class="w-fit">Instagram</a>
+            <a href="https://wa.me/34658451301?text=Hola%20Málaga%20Slow!%20Me%20gustaría%20pedir%20información%20sobre%20un%20tour."
+              target="_blank" rel="noopener noreferrer" class="w-fit">WhatsApp</a>
+          </div>
+
+          <div class="flex flex-col space-y-2 w-fit min-w-0">
+            <a href="tel:+34658451301" class="w-fit">+34 658 451 301</a>
+            <a href="mailto:info@malagaslow.com" class="w-fit">info@malagaslow.com</a>
+          </div>
         </div>
-        <div class="flex flex-col space-y-2 min-w-0 break-words text-center">
-          <a href="https://www.instagram.com/malagaslow/" target="_blank" rel="noopener noreferrer" class="text-[12px] text-[#FFFFFF] hover:underline cursor-pointer break-words">Instagram</a>
-          <a href="https://wa.me/34658451301?text=Hola%20Málaga%20Slow!%20Me%20gustaría%20pedir%20información%20sobre%20un%20tour." target="_blank" rel="noopener noreferrer" class="text-[12px] text-[#FFFFFF] hover:underline cursor-pointer break-words">WhatsApp</a>
-        </div>
-        <div class="flex flex-col items-center space-y-2 min-w-0 break-words">
-          <a href="#" class="text-[12px] text-[#FFFFFF] hover:underline cursor-pointer break-words">Política de
-            privacidad</a>
-          <a href="#" class="text-[12px] text-[#FFFFFF] hover:underline cursor-pointer break-words">Política de
-            cookies</a>
-        </div>
-      </div>
-      <div class="flex flex-col items-center justify-center mt-8 py-4 md:hidden">
-        <img src="../img/Logo_footer.png" alt="Logotipo Málaga Slow" class="h-6 w-auto object-contain" />
-        <p class="text-[#FFFFFF] text-[10px] mt-1.5">© 2026 Todos los derechos reservados</p>
       </div>
 
-      <!-- Escritorio -->
-      <div class="hidden md:flex md:flex-row md:items-start md:justify-between md:gap-12">
-        <div class="flex flex-col space-y-2">
-          <img src="../img/Logo_footer.png" alt="Logotipo Málaga Slow" class="h-8 w-auto object-contain" />
-          <p class="text-[#FFFFFF] text-sm">© 2026 Todos los derechos reservados</p>
+      <!-- Legal level (Copyright + Policies) -->
+      <div class="mt-14 flex flex-row justify-between items-end w-full">
+        <p class="w-fit">© 2026 Todos los derechos reservados</p>
+        <div class="flex flex-row gap-x-4 w-fit">
+          <a href="#" class="w-fit">Privacidad</a>
+          <a href="#" class="w-fit">Cookies</a>
         </div>
-        <div class="flex flex-row items-start gap-10 lg:gap-20">
-          <div class="flex flex-col space-y-2">
-            <a href="https://www.instagram.com/malagaslow/" target="_blank" rel="noopener noreferrer" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">Instagram</a>
-            <a href="https://wa.me/34658451301?text=Hola%20Málaga%20Slow!%20Me%20gustaría%20pedir%20información%20sobre%20un%20tour." target="_blank" rel="noopener noreferrer" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- Desktop / iPad footer: unchanged -->
+    <div class="hidden md:block py-8 px-8 md:px-16">
+      <div class="max-w-[1440px] mx-auto flex flex-row justify-between items-start">
+        <div class="flex flex-col items-start">
+          <img src="../img/Logo_footer.png" alt="Málaga Slow Logo" class="h-10 w-auto object-contain" />
+          <p class="mt-14 text-xs">© 2026 Todos los derechos reservados</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-x-10 text-left">
+          <div class="flex flex-col">
+            <div class="flex flex-col space-y-2">
+              <a href="https://www.instagram.com/malagaslow/" target="_blank" rel="noopener noreferrer"
+                class="text-xs text-[#FFFFFF]">Instagram</a>
+              <a href="https://wa.me/34658451301?text=Hola%20Málaga%20Slow!%20Me%20gustaría%20pedir%20información%20sobre%20un%20tour."
+                target="_blank" rel="noopener noreferrer" class="text-xs text-[#FFFFFF]">WhatsApp</a>
+            </div>
+            <a href="#" class="mt-14 text-xs text-[#FFFFFF]">Política de privacidad</a>
           </div>
-          <div class="flex flex-col space-y-2">
-            <a href="tel:+34658451301" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">+34 658 451 301</a>
-            <a href="mailto:info@malagaslow.com" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">info@malagaslow.com</a>
-          </div>
-          <div class="flex flex-col space-y-2">
-            <a href="#" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">Política de privacidad</a>
-            <a href="#" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">Política de cookies</a>
+
+          <div class="flex flex-col">
+            <div class="flex flex-col space-y-2">
+              <a href="tel:+34658451301" class="text-xs text-[#FFFFFF]">+34 658 451 301</a>
+              <a href="mailto:info@malagaslow.com" class="text-xs text-[#FFFFFF]">info@malagaslow.com</a>
+            </div>
+            <a href="#" class="mt-14 text-xs text-[#FFFFFF]">Política de cookies</a>
           </div>
         </div>
       </div>
@@ -468,6 +541,27 @@
       wheelMultiplier: 1,
       autoResize: true,
       anchors: true,
+    });
+
+    // Ensure in-page anchors scroll with Lenis (no instant jump),
+    // while respecting per-target scroll-margin-top (e.g. Tailwind scroll-mt-24).
+    document.addEventListener('click', (e) => {
+      const link = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!link) return;
+
+      const href = link.getAttribute('href') || '';
+      if (href === '#' || href.length < 2) return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      e.preventDefault();
+
+      const scrollMarginTop = parseFloat(getComputedStyle(target).scrollMarginTop || '0') || 0;
+      lenis.scrollTo(target, { offset: -scrollMarginTop });
+
+      // Update the URL hash without triggering a native jump.
+      history.pushState(null, '', href);
     });
 
     function raf(time) {

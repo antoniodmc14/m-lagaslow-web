@@ -160,15 +160,9 @@
         <span>Tours</span>
         <span class="nav-underline absolute -bottom-1 left-0 w-full h-[2px] bg-[#307EFF]"></span>
       </a>
-      <a href="index.html#booking"
-        class="relative group text-[#307EFF] font-semibold tracking-[-0.02em] transition-colors duration-300 py-1">
-        <span>Reservas</span>
-        <span
-          class="nav-underline absolute -bottom-1 left-0 w-0 h-[2px] bg-[#307EFF] transition-all duration-300 group-hover:w-full"></span>
-      </a>
       <a href="index.html#about"
         class="relative group text-[#307EFF] font-semibold tracking-[-0.02em] transition-colors duration-300 py-1">
-        <span>Sobre nosotros</span>
+        <span>Nosotros</span>
         <span
           class="nav-underline absolute -bottom-1 left-0 w-0 h-[2px] bg-[#307EFF] transition-all duration-300 group-hover:w-full"></span>
       </a>
@@ -215,10 +209,8 @@
           class="mobile-nav-link text-left text-[#1E1E1E] hover:text-[#307EFF] transition-colors duration-200 py-4 px-2 text-[24px] font-medium leading-tight tracking-[-0.06em] border-b border-gray-100">Inicio</a>
         <a href="index.html#tours"
           class="mobile-nav-link text-left text-[#1E1E1E] hover:text-[#307EFF] transition-colors duration-200 py-4 px-2 text-[24px] font-medium leading-tight tracking-[-0.06em] border-b border-gray-100">Tours</a>
-        <a href="index.html#booking"
-          class="mobile-nav-link text-left text-[#1E1E1E] hover:text-[#307EFF] transition-colors duration-200 py-4 px-2 text-[24px] font-medium leading-tight tracking-[-0.06em] border-b border-gray-100">Reservas</a>
         <a href="index.html#about"
-          class="mobile-nav-link text-left text-[#1E1E1E] hover:text-[#307EFF] transition-colors duration-200 py-4 px-2 text-[24px] font-medium leading-tight tracking-[-0.06em] border-b border-gray-100">Sobre nosotros</a>
+          class="mobile-nav-link text-left text-[#1E1E1E] hover:text-[#307EFF] transition-colors duration-200 py-4 px-2 text-[24px] font-medium leading-tight tracking-[-0.06em] border-b border-gray-100">Nosotros</a>
         <a href="#"
           class="mobile-lang-option block w-full text-left text-[#BCBCBC] hover:text-[#307EFF] transition-colors duration-200 py-4 px-2 text-base font-medium leading-tight tracking-[-0.06em] border-b border-gray-100">Español</a>
         <a href="../index.html"
@@ -337,46 +329,65 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-[#1E1E1E] text-[#FFFFFF] py-6 px-8 md:py-16 md:px-16 md:text-[16px]">
-    <div class="max-w-[1440px] mx-auto">
-      <div class="grid grid-cols-3 gap-x-1 gap-y-6 text-left md:hidden">
-        <div class="flex flex-col space-y-2 min-w-0 break-words">
-          <a href="tel:+34658451301" class="text-[10px] text-[#FFFFFF] hover:underline cursor-pointer break-words">+34
-            658 451 301</a>
-          <a href="mailto:info@malagaslow.com" class="text-[10px] text-[#FFFFFF] hover:underline cursor-pointer break-words">info@malagaslow.com</a>
+
+
+<footer class="bg-[#1E1E1E] text-[#FFFFFF]">
+    <!-- Mobile footer (ONLY): per provided spec -->
+    <div class="md:hidden flex flex-col items-start py-10 px-8 text-left text-[11px]">
+      <!-- Top row (Logo + Contact columns) -->
+      <div class="flex flex-row justify-between w-full items-start">
+        <img src="../img/Logo_footer.png" alt="Málaga Slow Logo" class="h-8 w-auto object-contain" />
+
+        <div class="flex flex-row gap-x-4">
+          <div class="flex flex-col space-y-2 w-fit min-w-0">
+            <a href="https://www.instagram.com/malagaslow/" target="_blank" rel="noopener noreferrer"
+              class="w-fit">Instagram</a>
+            <a href="https://wa.me/34658451301?text=Hola%20Málaga%20Slow!%20Me%20gustaría%20pedir%20información%20sobre%20un%20tour."
+              target="_blank" rel="noopener noreferrer" class="w-fit">WhatsApp</a>
+          </div>
+
+          <div class="flex flex-col space-y-2 w-fit min-w-0">
+            <a href="tel:+34658451301" class="w-fit">+34 658 451 301</a>
+            <a href="mailto:info@malagaslow.com" class="w-fit">info@malagaslow.com</a>
+          </div>
         </div>
-        <div class="flex flex-col space-y-2 min-w-0 break-words text-center">
-          <a href="https://www.instagram.com/malagaslow/" target="_blank" rel="noopener noreferrer" class="text-[10px] text-[#FFFFFF] hover:underline cursor-pointer break-words">Instagram</a>
-          <a href="https://wa.me/34658451301?text=Hola%20Málaga%20Slow!%20Me%20gustaría%20pedir%20información%20sobre%20un%20tour." target="_blank" rel="noopener noreferrer" class="text-[10px] text-[#FFFFFF] hover:underline cursor-pointer break-words">WhatsApp</a>
-        </div>
-        <div class="flex flex-col items-center space-y-2 min-w-0 break-words">
-          <a href="#" class="text-[10px] text-[#FFFFFF] hover:underline cursor-pointer break-words">Política de privacidad</a>
-          <a href="#" class="text-[10px] text-[#FFFFFF] hover:underline cursor-pointer break-words">Política de cookies</a>
-        </div>
-      </div>
-      <div class="flex flex-col items-center justify-center mt-8 py-4 md:hidden">
-        <img src="../img/Logo_footer.png" alt="Logotipo Málaga Slow" class="h-6 w-auto object-contain" />
-        <p class="text-[#FFFFFF] text-[10px] mt-1.5">© 2026 Todos los derechos reservados</p>
       </div>
 
-      <div class="hidden md:flex md:flex-row md:items-start md:justify-between md:gap-12">
-        <div class="flex flex-col space-y-2">
-          <img src="../img/Logo_footer.png" alt="Logotipo Málaga Slow" class="h-10 w-auto object-contain" />
-          <p class="text-[#FFFFFF] text-sm">© 2026 Todos los derechos reservados</p>
+      <!-- Legal level (Copyright + Policies) -->
+      <div class="mt-14 flex flex-row justify-between items-end w-full">
+        <p class="w-fit">© 2026 Todos los derechos reservados</p>
+        <div class="flex flex-row gap-x-4 w-fit">
+          <a href="#" class="w-fit">Privacidad</a>
+          <a href="#" class="w-fit">Cookies</a>
         </div>
-        <div class="flex flex-row items-start gap-10 lg:gap-20">
-          <div class="flex flex-col space-y-2">
-            <a href="https://www.instagram.com/malagaslow/" target="_blank" rel="noopener noreferrer" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">Instagram</a>
-            <a href="https://wa.me/34658451301?text=Hola%20Málaga%20Slow!%20Me%20gustaría%20pedir%20información%20sobre%20un%20tour." target="_blank" rel="noopener noreferrer" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- Desktop / iPad footer: unchanged -->
+    <div class="hidden md:block py-8 px-8 md:px-16">
+      <div class="max-w-[1440px] mx-auto flex flex-row justify-between items-start">
+        <div class="flex flex-col items-start">
+          <img src="../img/Logo_footer.png" alt="Málaga Slow Logo" class="h-10 w-auto object-contain" />
+          <p class="mt-14 text-xs">© 2026 Todos los derechos reservados</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-x-10 text-left">
+          <div class="flex flex-col">
+            <div class="flex flex-col space-y-2">
+              <a href="https://www.instagram.com/malagaslow/" target="_blank" rel="noopener noreferrer"
+                class="text-xs text-[#FFFFFF]">Instagram</a>
+              <a href="https://wa.me/34658451301?text=Hola%20Málaga%20Slow!%20Me%20gustaría%20pedir%20información%20sobre%20un%20tour."
+                target="_blank" rel="noopener noreferrer" class="text-xs text-[#FFFFFF]">WhatsApp</a>
+            </div>
+            <a href="#" class="mt-14 text-xs text-[#FFFFFF]">Política de privacidad</a>
           </div>
-          <div class="flex flex-col space-y-2">
-            <a href="tel:+34658451301" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">+34 658 451 301</a>
-            <a href="mailto:info@malagaslow.com" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">info@malagaslow.com</a>
-          </div>
-          <div class="flex flex-col space-y-2">
-            <a href="#" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">Política de privacidad</a>
-            <a href="#" class="text-sm text-[#FFFFFF] hover:underline cursor-pointer">Política de cookies</a>
+
+          <div class="flex flex-col">
+            <div class="flex flex-col space-y-2">
+              <a href="tel:+34658451301" class="text-xs text-[#FFFFFF]">+34 658 451 301</a>
+              <a href="mailto:info@malagaslow.com" class="text-xs text-[#FFFFFF]">info@malagaslow.com</a>
+            </div>
+            <a href="#" class="mt-14 text-xs text-[#FFFFFF]">Política de cookies</a>
           </div>
         </div>
       </div>
