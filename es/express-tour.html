@@ -136,6 +136,7 @@
     .burger-icon.open .burger-line:nth-child(3) {
       transform: translateY(-8px) rotate(-45deg);
     }
+
   </style>
 </head>
 
@@ -292,7 +293,7 @@
           </div>
         </div>
 
-        <a href="index.html#booking"
+        <a href="https://fareharbor.com/embeds/book/malagaslow/?full-items=yes&amp;locale=es"
           class="block mt-12 mb-12 md:mt-8 md:mb-0 bg-[#307EFF] text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105 mx-auto md:inline-block md:mx-0 w-fit">
           Reserva tu tour
         </a>
@@ -395,30 +396,6 @@
       </div>
     </div>
   </footer>
-
-  <script type="module">
-    import Lenis from 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/+esm';
-
-    const lenis = new Lenis({
-      duration: 1.35,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      autoResize: true,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    lenis.on('scroll', () => {
-      window.dispatchEvent(new Event('scroll'));
-    });
-  </script>
 
   <script>
     (function () {
@@ -536,6 +513,46 @@
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
     })();
   </script>
+
+  <script type="module">
+    import Lenis from 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/+esm';
+
+    const lenis = new Lenis({
+      duration: 1.35,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      autoResize: true,
+      prevent: (node) => node.closest('.fareharbor-lightframe, #fareharbor-lightframe-container, iframe'),
+    });
+
+    window.FH = window.FH || {};
+    const _fhPrev = window.FH.autoLightframe;
+    const _fhBase = _fhPrev && typeof _fhPrev === 'object' ? _fhPrev : {};
+    const _fhOnOpen = _fhBase.onOpen;
+    const _fhOnClose = _fhBase.onClose;
+    window.FH.autoLightframe = {
+      ..._fhBase,
+      onOpen: () => {
+        lenis.stop();
+        if (typeof _fhOnOpen === 'function') _fhOnOpen();
+      },
+      onClose: () => {
+        lenis.start();
+        if (typeof _fhOnClose === 'function') _fhOnClose();
+      },
+    };
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+  </script>
+  <script src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"></script>
 </body>
 
 </html>

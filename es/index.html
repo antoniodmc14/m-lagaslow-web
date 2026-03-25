@@ -402,11 +402,11 @@
 
   <!-- Sección sobre nosotros -->
   <section id="about" class="w-full bg-white md:bg-[#F3F4F6] pt-0 mt-0 pb-40 md:py-40">
-    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[2fr_2fr] gap-20 items-center">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:flex md:flex-row md:items-stretch gap-20">
       <div
-        class="mx-auto max-w-[600px] order-2 md:order-1 text-center md:text-left opacity-0 translate-y-10 transition-all duration-1000 ease-out about-reveal">
+        class="mx-auto max-w-[600px] md:max-w-none md:flex-1 md:min-w-0 order-2 md:order-1 text-center md:text-left opacity-0 translate-y-10 transition-all duration-1000 ease-out about-reveal">
         <p class="text-lg leading-[1.35] tracking-[-0.04em] text-gray-800">
-          Málaga Slow no es solo una empresa de tours; es el proyecto personal de Marcos y José, dos amigos de toda la vida unidos por una pasión compartida: nuestra ciudad.<br><br>
+          Málaga Slow es el proyecto personal de Marcos y José, dos amigos de toda la vida unidos por una pasión compartida: nuestra ciudad.<br><br>
 
 Estamos convencidos de que la mejor forma de descubrir Málaga no es desde la ventanilla de un autobús, sino a través de los ojos de quienes hemos crecido en sus calles. Queremos mostrarte el alma de nuestra tierra desde una perspectiva diferente, combinando la comodidad de nuestros vehículos eléctricos con la cercanía y profesionalidad que mereces.
 
@@ -418,9 +418,9 @@ Desde los rincones más icónicos hasta esos secretos que solo los locales conoc
           Nuestros tours</a>
       </div>
       <div
-        class="order-1 md:order-2 -mx-8 md:mx-0 opacity-0 translate-y-10 transition-all duration-1000 ease-out about-reveal">
+        class="order-1 md:order-2 -mx-8 md:mx-0 md:flex-1 md:min-w-0 md:flex md:flex-col md:min-h-0 opacity-0 translate-y-10 transition-all duration-1000 ease-out about-reveal">
         <img src="../img/Catedral_Section_02.png" alt="Catedral de Málaga y ciudad"
-          class="w-full h-[70vh] md:h-[345px] lg:h-auto object-cover rounded-none md:rounded-lg" />
+          class="w-full h-[70vh] object-cover rounded-none md:rounded-lg md:h-full md:min-h-0" />
       </div>
     </div>
   </section>
@@ -529,52 +529,6 @@ Desde los rincones más icónicos hasta esos secretos que solo los locales conoc
     </div>
   </footer>
 
-  <script type="module">
-    import Lenis from 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/+esm';
-
-    const lenis = new Lenis({
-      duration: 1.35,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      autoResize: true,
-      anchors: true,
-    });
-
-    // Ensure in-page anchors scroll with Lenis (no instant jump),
-    // while respecting per-target scroll-margin-top (e.g. Tailwind scroll-mt-24).
-    document.addEventListener('click', (e) => {
-      const link = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
-      if (!link) return;
-
-      const href = link.getAttribute('href') || '';
-      if (href === '#' || href.length < 2) return;
-
-      const target = document.querySelector(href);
-      if (!target) return;
-
-      e.preventDefault();
-
-      const scrollMarginTop = parseFloat(getComputedStyle(target).scrollMarginTop || '0') || 0;
-      lenis.scrollTo(target, { offset: -scrollMarginTop });
-
-      // Update the URL hash without triggering a native jump.
-      history.pushState(null, '', href);
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    lenis.on('scroll', () => {
-      window.dispatchEvent(new Event('scroll'));
-    });
-  </script>
-
   <script>
     (function () {
       var burgerBtn = document.getElementById('burger-btn');
@@ -652,125 +606,125 @@ Desde los rincones más icónicos hasta esos secretos que solo los locales conoc
   </script>
 
   <script>
-    function setupHeroCarousel() {
-      const slides = document.querySelectorAll('.hero-slide');
-      if (!slides.length) return;
+    (function () {
+      function setupHeroCarousel() {
+        const slides = document.querySelectorAll('.hero-slide');
+        if (!slides.length) return;
 
-      let current = 0;
+        let current = 0;
 
-      slides.forEach((slide, index) => {
-        if (index === 0) {
-          slide.classList.add('opacity-100');
-          slide.classList.remove('opacity-0');
-        } else {
-          slide.classList.add('opacity-0');
-          slide.classList.remove('opacity-100');
-        }
-      });
-
-      setInterval(() => {
-        const prev = current;
-        current = (current + 1) % slides.length;
-
-        slides[prev].classList.remove('opacity-100');
-        slides[prev].classList.add('opacity-0');
-
-        slides[current].classList.remove('opacity-0');
-        slides[current].classList.add('opacity-100');
-      }, 5000);
-    }
-
-    function updateHeaderMenuColors() {
-      const header = document.querySelector('header');
-      const hero = document.querySelector('#hero');
-      if (!header || !hero) return;
-
-      const heroHeight = hero.offsetHeight;
-      const navLinks = header.querySelectorAll('nav a');
-
-      const useBlue = window.scrollY > (heroHeight - 80);
-
-      navLinks.forEach(link => {
-        const underline = link.querySelector('.nav-underline');
-
-        if (useBlue) {
-          link.classList.remove('text-white');
-          link.classList.add('text-[#307EFF]');
-          if (underline) {
-            underline.classList.remove('bg-white');
-            underline.classList.add('bg-[#307EFF]');
+        slides.forEach((slide, index) => {
+          if (index === 0) {
+            slide.classList.add('opacity-100');
+            slide.classList.remove('opacity-0');
+          } else {
+            slide.classList.add('opacity-0');
+            slide.classList.remove('opacity-100');
           }
-        } else {
-          link.classList.add('text-white');
-          link.classList.remove('text-[#307EFF]');
-          if (underline) {
-            underline.classList.add('bg-white');
-            underline.classList.remove('bg-[#307EFF]');
-          }
-        }
-      });
+        });
 
-      const burgerBtn = document.getElementById('burger-btn');
-      if (burgerBtn) {
-        if (useBlue) {
-          burgerBtn.classList.remove('text-white');
-          burgerBtn.classList.add('text-[#307EFF]');
-        } else {
-          burgerBtn.classList.add('text-white');
-          burgerBtn.classList.remove('text-[#307EFF]');
+        setInterval(() => {
+          const prev = current;
+          current = (current + 1) % slides.length;
+
+          slides[prev].classList.remove('opacity-100');
+          slides[prev].classList.add('opacity-0');
+
+          slides[current].classList.remove('opacity-0');
+          slides[current].classList.add('opacity-100');
+        }, 5000);
+      }
+
+      function updateHeaderMenuColors() {
+        const header = document.querySelector('header');
+        const hero = document.querySelector('#hero');
+        if (!header || !hero) return;
+
+        const heroHeight = hero.offsetHeight;
+        const navLinks = header.querySelectorAll('nav a');
+
+        const useBlue = window.scrollY > (heroHeight - 80);
+
+        navLinks.forEach(link => {
+          const underline = link.querySelector('.nav-underline');
+
+          if (useBlue) {
+            link.classList.remove('text-white');
+            link.classList.add('text-[#307EFF]');
+            if (underline) {
+              underline.classList.remove('bg-white');
+              underline.classList.add('bg-[#307EFF]');
+            }
+          } else {
+            link.classList.add('text-white');
+            link.classList.remove('text-[#307EFF]');
+            if (underline) {
+              underline.classList.add('bg-white');
+              underline.classList.remove('bg-[#307EFF]');
+            }
+          }
+        });
+
+        const burgerBtn = document.getElementById('burger-btn');
+        if (burgerBtn) {
+          if (useBlue) {
+            burgerBtn.classList.remove('text-white');
+            burgerBtn.classList.add('text-[#307EFF]');
+          } else {
+            burgerBtn.classList.add('text-white');
+            burgerBtn.classList.remove('text-[#307EFF]');
+          }
         }
       }
-    }
 
-    function setupExperienceReveal() {
-      const elements = document.querySelectorAll('.experience-reveal');
-      if (!elements.length) return;
+      // Scroll reveal for Experience section
+      const observerOptions = { threshold: 0.1 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0', 'translate-y-4', 'translate-y-10');
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+          }
+        });
+      }, observerOptions);
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('opacity-100', 'translate-y-0');
-              entry.target.classList.remove('opacity-0', 'translate-y-4');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
+      document.querySelectorAll('.experience-reveal, .about-reveal').forEach(el => observer.observe(el));
 
-      elements.forEach((el) => observer.observe(el));
-    }
+      window.addEventListener('scroll', updateHeaderMenuColors);
+      window.addEventListener('load', () => {
+        setupHeroCarousel();
+        updateHeaderMenuColors();
+      });
+    })();
+  </script>
 
-    function setupAboutReveal() {
-      const elements = document.querySelectorAll('.about-reveal');
-      if (!elements.length) return;
+  <a id="fh-booking-btn" href="https://fareharbor.com/embeds/book/malagaslow/?full-items=yes"
+     class="fixed bottom-6 right-6 z-[9999] bg-[#307EFF] text-white font-semibold rounded-full px-6 py-3 shadow-lg transition-all duration-500 ease-in-out opacity-100 scale-100 hover:bg-[#4B8BFF] hover:-translate-y-1 hover:shadow-xl active:translate-y-0">
+    Reserva tu tour
+  </a>
+  <script src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"></script>
+  <script>
+    window.addEventListener('scroll', function() {
+      const btn = document.getElementById('fh-booking-btn');
+      const footer = document.querySelector('footer');
+      if (!btn || !footer) return;
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('opacity-100', 'translate-y-0');
-              entry.target.classList.remove('opacity-0', 'translate-y-10');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
+      // Get the bounding rectangle of the footer
+      const footerRect = footer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
 
-      elements.forEach((el) => observer.observe(el));
-    }
-
-    window.addEventListener('scroll', updateHeaderMenuColors);
-    window.addEventListener('load', function () {
-      setupHeroCarousel();
-      updateHeaderMenuColors();
-      setupExperienceReveal();
-      setupAboutReveal();
+      // Check if the footer has entered the viewport (contacting the button area)
+      if (footerRect.top < windowHeight - 20) {
+        // Hide button: Add opacity-0 and scale-90 for a nice 'shrink' effect
+        btn.classList.add('opacity-0', 'pointer-events-none', 'scale-90');
+        btn.classList.remove('opacity-100', 'scale-100');
+      } else {
+        // Show button: Restore opacity and scale
+        btn.classList.remove('opacity-0', 'pointer-events-none', 'scale-90');
+        btn.classList.add('opacity-100', 'scale-100');
+      }
     });
   </script>
 </body>
-
 </html>
 
